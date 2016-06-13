@@ -1,0 +1,20 @@
+{
+    "name": "cakebox/rtorrent-php",
+    "description": "PHP 7 XMLRPC library for rtorrent",
+    "version": "0.0.1",
+    "license": "GPL v3",
+    "require": {
+        "php": ">=5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rtorrent\\": "src/Rtorrent/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cakebox/rtorrent-php"
+        }
+    ]
+}
