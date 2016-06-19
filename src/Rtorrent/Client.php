@@ -4,23 +4,23 @@ namespace Rtorrent;
 
 class Client
 {
-    private $XMLRPC_client;
+    private $RPCClient;
     private $encoder;
 
     private function call($method, $params)
     {
         $request = new \PhpXmlRpc\Request($method, [ $this->encoder->encode($params) ]);
-        $response = $this->XMLRPC_client->send($request);
+        $response = $this->$RPCClient->send($request);
 
         if ($response->faultCode()) {
-            return $response->faultString();
+            return ['faultCode' => $response->faultCode(), 'faultString' => $response->faultString()];
         }
         return $this->encoder->decode($response->value());
     }
 
     public function __construct($addr)
     {
-        $this->XMLRPC_client = new \PhpXmlRpc\Client($addr);
+        $this->$RPCClient = new \PhpXmlRpc\Client($addr);
         $this->encoder = new \PhpXmlRpc\Encoder();
         //$this->XMLRPC_client->setDebug(2);
     }
