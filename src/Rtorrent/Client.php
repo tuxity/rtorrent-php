@@ -10,7 +10,7 @@ class Client
     private function call($method, $params)
     {
         $request = new \PhpXmlRpc\Request($method, [ $this->encoder->encode($params) ]);
-        $response = $this->$RPCClient->send($request);
+        $response = $this->RPCClient->send($request);
 
         if ($response->faultCode()) {
             return ['faultCode' => $response->faultCode(), 'faultString' => $response->faultString()];
@@ -20,7 +20,7 @@ class Client
 
     public function __construct($addr)
     {
-        $this->$RPCClient = new \PhpXmlRpc\Client($addr);
+        $this->RPCClient = new \PhpXmlRpc\Client($addr);
         $this->encoder = new \PhpXmlRpc\Encoder();
         //$this->XMLRPC_client->setDebug(2);
     }
