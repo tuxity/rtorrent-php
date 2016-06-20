@@ -5,7 +5,7 @@
     "license": "GPL v3",
     "require": {
         "php": ">=5.7",
-        "phpxmlrpc/phpxmlrpc": "4.0"
+        "phpxmlrpc/phpxmlrpc": "dev-i8-support"
     },
     "autoload": {
         "psr-4": {
@@ -16,6 +16,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cakebox/rtorrent-php"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Tuxity/phpxmlrpc"
         }
     ]
 }
