@@ -51,8 +51,31 @@ class Client
             'd.get_completed_chunks=',
             'd.get_state_changed='
         ];
+        $torrents = [];
 
-        return $this->call('d.multicall', $params);
+        foreach ($this->call('d.multicall', $params) as $t) {
+            $t_obj                   = new \stdClass();
+            $t_obj->hash             = $t[0];
+            $t_obj->name             = $t[1];
+            $t_obj->size_bytes       = $t[2];
+            $t_obj->completed_bytes  = $t[3];
+            $t_obj->down_rate        = $t[4];
+            $t_obj->up_rate          = $t[5];
+            $t_obj->down_total       = $t[6];
+            $t_obj->up_total         = $t[7];
+            $t_obj->is_open          = $t[8];
+            $t_obj->is_active        = $t[9];
+            $t_obj->is_hash_checking = $t[10];
+            $t_obj->ratio            = $t[11];
+            $t_obj->chunk_size       = $t[12];
+            $t_obj->size_chunks      = $t[13];
+            $t_obj->completed_chunks = $t[14];
+            $t_obj->state_changed    = $t[15];
+
+            $torrents[$t[0]] = $t_obj;
+        }
+
+        return $torrents;
     }
 
     public function add($torrent, $directory)
